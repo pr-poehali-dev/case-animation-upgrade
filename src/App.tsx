@@ -1,32 +1,26 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Inventory from "./pages/Inventory";
-import Upgrade from "./pages/Upgrade";
-import Layout from "./components/Layout";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Index from './pages/Index';
+import Inventory from './pages/Inventory';
+import Upgrade from './pages/Upgrade';
+import CaseBattle from './pages/CaseBattle';
+import NotFound from './pages/NotFound';
+import './App.css';
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+function App() {
+  return (
+    <Router>
+      <Layout>
         <Routes>
-          <Route path="/" element={<Layout><Index /></Layout>} />
-          <Route path="/inventory" element={<Layout><Inventory /></Layout>} />
-          <Route path="/upgrade" element={<Layout><Upgrade /></Layout>} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/" element={<Index />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/upgrade" element={<Upgrade />} />
+          <Route path="/case-battle" element={<CaseBattle />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+      </Layout>
+    </Router>
+  );
+}
 
 export default App;
